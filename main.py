@@ -27,7 +27,7 @@ def getSummonerNames():
             for participant in event['participants']:
                 names['SummonerNames'].append(participant.get('summonerName'))
 
-    with open(f"{projectPath}\\playerList.json", 'w') as writeFile:
+    with open(f"{projectPath}\\playerList.json", 'a') as writeFile:
         json.dump(names, writeFile)
     print(names)
 
@@ -55,7 +55,6 @@ def getGameInfo():
                                     print(gameFileName)
                                     getFile(gameFileName)
                                     getSummonerNames()
-                                    exit()
                                 except KeyError:
                                     print('not found')
                                     continue
