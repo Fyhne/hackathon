@@ -29,7 +29,7 @@ def getSummonerNames():
 
     with open(f"{projectPath}\\playerList.json", 'a') as writeFile:
         json.dump(names, writeFile, indent=2)
-    print(names)
+    #print(names)
 
 
 def getGameInfo():
