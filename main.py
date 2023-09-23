@@ -20,11 +20,13 @@ def getSummonerNames():
 
     for event in gameData:
         if 'game_info' == event.get('eventType'):
-            names = []
+            names = {
+                'SummonerNames' : 'Placeholder'
+            }
             for participant in event['participants']:
-                names.append(participant.get('summonerName'))
+                names['SummonerNames'].append(participant.get('summonerName'))
                 with open(f"{projectPath}\playerList.json", 'w') as writeFile:
-                    json.dump((names), writeFile)
+                    json.dump(names, writeFile)
             print(names)
 
 def getGameInfo():
