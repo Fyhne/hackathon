@@ -6,6 +6,7 @@ from io import BytesIO
 from projectPath import projectPath
 
 S3BucketGamesDatabase = "https://power-rankings-dataset-gprhack.s3.us-west-2.amazonaws.com/games/{}.json.gz" #.format should be used along with fileName to provide the specific file being searched for
+dictList = []
 
 def getFile(file_name):
     response = requests.get(S3BucketGamesDatabase.format(file_name))
@@ -26,10 +27,9 @@ def getSummonerNames():
         if 'game_info' == event.get('eventType'):
             for participant in event['participants']:
                 names['SummonerNames'].append(participant.get('summonerName'))
-
-    with open(f"{projectPath}\\playerList.json", 'a') as writeFile:
-        json.dump(names, writeFile, indent=2)
     print(names)
+    dictList.append(names)
+    #print(names)
 
 
 def getGameInfo():
@@ -55,8 +55,11 @@ def getGameInfo():
                                     print(gameFileName)
                                     getFile(gameFileName)
                                     getSummonerNames()
+                                    print(dictList)
                                 except KeyError:
                                     print('not found')
                                     continue
+    with open(f"{projectPath}\\playerList.json", 'a') as writeFile:
+        json.dump(dictList, writeFile, indent=2)
 
 getGameInfo()
