@@ -27,7 +27,6 @@ def getSummonerNames():
         if 'game_info' == event.get('eventType'):
             for participant in event['participants']:
                 names['SummonerNames'].append(participant.get('summonerName'))
-    print(names)
     dictList.append(names)
     #print(names)
 
